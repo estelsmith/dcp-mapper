@@ -19,6 +19,11 @@ abstract class Collection implements \Iterator
         $this->data[] = $value;
     }
 
+    public function toArray()
+    {
+        return $this->data;
+    }
+
     public function current()
     {
         return $this->data[$this->position];

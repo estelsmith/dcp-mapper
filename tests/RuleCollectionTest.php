@@ -7,7 +7,7 @@ use DCP\Mapper\RuleCollection;
 use DCP\Mapper\RuleInterface;
 use tests\Stubs\Rules\RuleStub;
 
-require 'Stubs/Rules/RuleStub.php';
+require_once 'Stubs/Rules/RuleStub.php';
 
 class RuleCollectionTest extends \PHPUnit_Framework_TestCase
 {
@@ -54,5 +54,32 @@ class RuleCollectionTest extends \PHPUnit_Framework_TestCase
         }
 
         $this->assertEquals($expectedMatches, $actualMatches);
+    }
+
+    public function testCanGetEmptyCollectionAsEmptyArray()
+    {
+        $instance = new RuleCollection();
+
+        $this->assertEmpty($instance->toArray());
+    }
+
+    public function testCanGetCollectionAsArray()
+    {
+        $expectedData = [
+            new RuleStub(),
+            new RuleStub()
+        ];
+
+        $actualData = null;
+
+        $instance = new RuleCollection();
+
+        foreach ($expectedData as $item) {
+            $instance->add($item);
+        }
+
+        $actualData = $instance->toArray();
+
+        $this->assertEquals($expectedData, $actualData);
     }
 }

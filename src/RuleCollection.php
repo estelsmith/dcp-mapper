@@ -20,4 +20,12 @@ class RuleCollection extends Collection
         parent::add($rule);
         return $this;
     }
+
+    /**
+     * @return RuleInterface[]
+     */
+    public function toArray()
+    {
+        return parent::toArray();
+    }
 }

@@ -4,7 +4,7 @@ namespace tests;
 
 use tests\Stubs\CollectionStub;
 
-require 'Stubs/CollectionStub.php';
+require_once 'Stubs/CollectionStub.php';
 
 class CollectionTest extends \PHPUnit_Framework_TestCase
 {
@@ -52,5 +52,32 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
         }
 
         $this->assertEquals($expectedMatches, $actualMatches);
+    }
+
+    public function testCanReturnEmptyCollectionAsEmptyArray()
+    {
+        $instance = new CollectionStub();
+
+        $this->assertEmpty($instance->toArray());
+    }
+
+    public function testCanGetCollectionAsArray()
+    {
+        $expectedData = [
+            'another test 1',
+            'another test 2'
+        ];
+
+        $actualData = null;
+
+        $instance = new CollectionStub();
+
+        foreach ($expectedData as $item) {
+            $instance->add($item);
+        }
+
+        $actualData = $instance->toArray();
+
+        $this->assertEquals($expectedData, $actualData);
     }
 }
