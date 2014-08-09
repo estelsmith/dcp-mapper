@@ -14,7 +14,7 @@ class TransformerCollection extends Collection
     public function add($transformer)
     {
         if (!($transformer instanceof TransformerInterface)) {
-            throw new InvalidArgumentException('$rule must be an instance of TransformerInterface');
+            throw new InvalidArgumentException('$transformer must be an instance of TransformerInterface');
         }
 
         parent::add($transformer);

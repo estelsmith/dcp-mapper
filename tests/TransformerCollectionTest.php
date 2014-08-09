@@ -13,7 +13,7 @@ class TransformerCollectionTest extends \PHPUnit_Framework_TestCase
 {
     public function testCannotAddNonTransformerToCollection()
     {
-        $expectedMessage = '$rule must be an instance of TransformerInterface';
+        $expectedMessage = '$transformer must be an instance of TransformerInterface';
         $actualMessage = '';
         $exceptionThrown = false;
 
