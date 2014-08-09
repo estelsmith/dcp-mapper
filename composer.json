@@ -1,0 +1,23 @@
+{
+    "name": "dcp/mapper",
+    "description": "A straightforward PHP AutoMapper",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Estel Smith",
+            "email": "estel.smith@gmail.com"
+        }
+    ],
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": {
+            "DCP\\Mapper\\": "src"
+        }
+    },
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "4.1.*"
+    }
+}
