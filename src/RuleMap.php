@@ -44,7 +44,7 @@ class RuleMap
 
     /**
      * @param string $field
-     * @return RuleCollection
+     * @return RuleCollection|RuleInterface[]
      */
     public function getRules($field)
     {

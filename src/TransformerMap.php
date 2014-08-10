@@ -44,7 +44,7 @@ class TransformerMap
 
     /**
      * @param string $field
-     * @return TransformerCollection
+     * @return TransformerCollection|TransformerInterface[]
      */
     public function getTransformers($field)
     {
