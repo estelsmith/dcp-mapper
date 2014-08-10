@@ -52,6 +52,6 @@ class TransformerMap
             return $this->transformers[$field];
         }
 
-        return null;
+        return new TransformerCollection();
     }
 }

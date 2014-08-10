@@ -52,6 +52,6 @@ class RuleMap
             return $this->rules[$field];
         }
 
-        return null;
+        return new RuleCollection();
     }
 }

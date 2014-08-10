@@ -93,7 +93,9 @@ class TransformerMapTest extends \PHPUnit_Framework_TestCase
             $instance->add($field, $transformer);
         }
 
-        $this->assertNull($instance->getTransformers('not_existing'));
+        $transformers = $instance->getTransformers('not_existing')->toArray();
+
+        $this->assertEmpty($transformers);
     }
 
     public function testCanAddAndRetrieveTransformersWithValidData()

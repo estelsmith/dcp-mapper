@@ -92,7 +92,9 @@ class RuleMapTest extends \PHPUnit_Framework_TestCase
             $instance->add($field, $rule);
         }
 
-        $this->assertNull($instance->getRules('not_existing'));
+        $rules = $instance->getRules('not_existing')->toArray();
+
+        $this->assertEmpty($rules);
     }
 
     public function testCanAddAndRetrieveRulesWithValidData()
