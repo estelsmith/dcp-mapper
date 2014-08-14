@@ -8,7 +8,31 @@ use DCP\Mapper\Exception\OutOfBoundsException;
 
 abstract class CollectionMap extends Map implements CollectionMapInterface
 {
-    public function get($key, callable $defaultCallback = null)
+    public function get($key, $default = true, $callback = null)
+    {
+        if ($default) {
+            return $this->getWithCallback($key, $callback);
+        }
+
+        return $this->getWithCallback($key, null);
+    }
+
+    public function add($key, $value, callable $defaultCollectionCallback = null)
+    {
+        $collection = self::get($key, false);
+
+        if (!$collection) {
+            /** @var Collection $collection */
+            $collection = call_user_func($defaultCollectionCallback);
+            $this->set($key, $collection);
+        }
+
+        $collection->add($value);
+
+        return $this;
+    }
+
+    protected function getWithCallback($key, callable $defaultCallback = null)
     {
         $collection = null;
 
@@ -21,21 +45,6 @@ abstract class CollectionMap extends Map implements CollectionMapInterface
         }
 
         return $collection;
-    }
-
-    public function add($key, $value, callable $defaultCollectionCallback = null)
-    {
-        $collection = self::get($key);
-
-        if (!$collection) {
-            /** @var Collection $collection */
-            $collection = call_user_func($defaultCollectionCallback);
-            $this->set($key, $collection);
-        }
-
-        $collection->add($value);
-
-        return $this;
     }
 
     protected function addWithTypeCheck($key, $value, $type, callable $callback = null)

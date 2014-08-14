@@ -30,15 +30,9 @@ class RuleMap extends CollectionMap
      */
     public function get($key, $default = true)
     {
-        $defaultCallback = null;
-
-        if ($default) {
-            $defaultCallback = function () {
-                return new RuleCollection();
-            };
-        }
-
-        return parent::get($key, $defaultCallback);
+        return parent::get($key, $default, function () {
+            return new RuleCollection();
+        });
     }
 
     /**
