@@ -2,8 +2,9 @@
 
 namespace DCP\Mapper;
 
-use DCP\Mapper\Exception\InvalidArgumentException;
+use DCP\Mapper\Collections\Maps\RuleMap;
 use DCP\Mapper\Collections\Maps\TransformerMap;
+use DCP\Mapper\Exception\InvalidArgumentException;
 
 class ObjectMapper implements MapperInterface
 {
@@ -91,7 +92,7 @@ class ObjectMapper implements MapperInterface
 
     private function processPropertyRules($property)
     {
-        $rules = $this->ruleMap->getRules($property);
+        $rules = $this->ruleMap->get($property);
 
         $proceed = true;
 

@@ -2,10 +2,10 @@
 
 namespace tests;
 
+use DCP\Mapper\Collections\Maps\RuleMap;
 use DCP\Mapper\Collections\Maps\TransformerMap;
 use DCP\Mapper\Exception\InvalidArgumentException;
 use DCP\Mapper\ObjectMapper;
-use DCP\Mapper\RuleMap;
 use DCP\Mapper\Rules\IgnoreFieldRule;
 use DCP\Mapper\Transformers\CallbackTransformer;
 use tests\Stubs\MapperSourceStub;
