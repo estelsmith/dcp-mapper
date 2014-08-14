@@ -3,6 +3,7 @@
 namespace DCP\Mapper;
 
 use DCP\Mapper\Exception\InvalidArgumentException;
+use DCP\Mapper\Collections\Maps\TransformerMap;
 
 class ObjectMapper implements MapperInterface
 {
@@ -106,7 +107,7 @@ class ObjectMapper implements MapperInterface
 
     private function processPropertyTransformers($property, $value)
     {
-        $transformers = $this->transformerMap->getTransformers($property);
+        $transformers = $this->transformerMap->get($property);
 
         $result = $value;
 
