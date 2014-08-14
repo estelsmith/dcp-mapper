@@ -33,7 +33,9 @@ class RuleMap extends CollectionMap
         $defaultCallback = null;
 
         if ($default) {
-            $defaultCallback = function () { return new RuleCollection(); };
+            $defaultCallback = function () {
+                return new RuleCollection();
+            };
         }
 
         return parent::get($key, $defaultCallback);
@@ -49,6 +51,8 @@ class RuleMap extends CollectionMap
             throw new InvalidArgumentException('$value must be an instance of RuleInterface');
         }
 
-        return parent::add($key, $value, function () { return new RuleCollection(); });
+        return parent::add($key, $value, function () {
+            return new RuleCollection();
+        });
     }
 }

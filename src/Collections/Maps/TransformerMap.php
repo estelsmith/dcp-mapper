@@ -34,7 +34,9 @@ class TransformerMap extends CollectionMap
         $defaultCallback = null;
 
         if ($default) {
-            $defaultCallback = function () { return new TransformerCollection(); };
+            $defaultCallback = function () {
+                return new TransformerCollection();
+            };
         }
 
         return parent::get($key, $defaultCallback);
@@ -50,6 +52,8 @@ class TransformerMap extends CollectionMap
             throw new InvalidArgumentException('$value must be an instance of TransformerInterface');
         }
 
-        return parent::add($key, $value, function () { return new TransformerCollection(); });
+        return parent::add($key, $value, function () {
+            return new TransformerCollection();
+        });
     }
 }
