@@ -3,11 +3,10 @@
 namespace DCP\Mapper\Collections\Maps;
 
 use DCP\Mapper\Exception\InvalidArgumentException;
-use DCP\Mapper\Exception\OutOfBoundsException;
 use DCP\Mapper\RuleCollection;
 use DCP\Mapper\RuleInterface;
 
-class RuleMap extends Map implements CollectionMapInterface
+class RuleMap extends CollectionMap
 {
     /**
      * @param mixed $key
@@ -31,17 +30,13 @@ class RuleMap extends Map implements CollectionMapInterface
      */
     public function get($key, $default = true)
     {
-        $collection = null;
+        $defaultCallback = null;
 
-        try {
-            $collection = parent::get($key);
-        } catch (OutOfBoundsException $exception) {
-            if ($default) {
-                $collection = new RuleCollection();
-            }
+        if ($default) {
+            $defaultCallback = function () { return new RuleCollection(); };
         }
 
-        return $collection;
+        return parent::get($key, $defaultCallback);
     }
 
     /**
@@ -54,15 +49,6 @@ class RuleMap extends Map implements CollectionMapInterface
             throw new InvalidArgumentException('$value must be an instance of RuleInterface');
         }
 
-        $collection = $this->get($key, false);
-
-        if (!$collection) {
-            $collection = new RuleCollection();
-            $this->set($key, $collection);
-        }
-
-        $collection->add($value);
-
-        return $this;
+        return parent::add($key, $value, function () { return new RuleCollection(); });
     }
 }

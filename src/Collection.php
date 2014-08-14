@@ -2,7 +2,7 @@
 
 namespace DCP\Mapper;
 
-abstract class Collection implements \Iterator
+class Collection implements \Iterator
 {
     /**
      * @var array

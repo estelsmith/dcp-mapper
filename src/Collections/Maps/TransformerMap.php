@@ -7,7 +7,7 @@ use DCP\Mapper\Exception\OutOfBoundsException;
 use DCP\Mapper\TransformerCollection;
 use DCP\Mapper\TransformerInterface;
 
-class TransformerMap extends Map implements CollectionMapInterface
+class TransformerMap extends CollectionMap
 {
     /**
      * @param mixed $key
@@ -31,17 +31,13 @@ class TransformerMap extends Map implements CollectionMapInterface
      */
     public function get($key, $default = true)
     {
-        $collection = null;
+        $defaultCallback = null;
 
-        try {
-            $collection = parent::get($key);
-        } catch (OutOfBoundsException $exception) {
-            if ($default) {
-                $collection = new TransformerCollection();
-            }
+        if ($default) {
+            $defaultCallback = function () { return new TransformerCollection(); };
         }
 
-        return $collection;
+        return parent::get($key, $defaultCallback);
     }
 
     /**
@@ -54,15 +50,6 @@ class TransformerMap extends Map implements CollectionMapInterface
             throw new InvalidArgumentException('$value must be an instance of TransformerInterface');
         }
 
-        $collection = $this->get($key, false);
-
-        if (!$collection) {
-            $collection = new TransformerCollection();
-            $this->set($key, $collection);
-        }
-
-        $collection->add($value);
-
-        return $this;
+        return parent::add($key, $value, function () { return new TransformerCollection(); });
     }
 }
