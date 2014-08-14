@@ -26,13 +26,8 @@ class ObjectMapper implements MapperInterface
 
     public function map($source, $target)
     {
-        if (!is_object($source)) {
-            throw new InvalidArgumentException('$source must be an object');
-        }
-
-        if (!is_object($target)) {
-            throw new InvalidArgumentException('$target must be an object');
-        }
+        $this->ensureIsObject('source', $source);
+        $this->ensureIsObject('target', $target);
 
         $sourceClass = new \ReflectionClass($source);
         $targetClass = new \ReflectionClass($target);
@@ -61,6 +56,13 @@ class ObjectMapper implements MapperInterface
         }
 
         return $target;
+    }
+
+    private function ensureIsObject($variableName, $object)
+    {
+        if (!is_object($object)) {
+            throw new InvalidArgumentException(sprintf('$%s must be an object', $variableName));
+        }
     }
 
     private function findGetterMethods(\ReflectionClass $class)
