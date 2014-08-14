@@ -4,21 +4,21 @@ namespace DCP\Mapper\Collections\Maps;
 
 use DCP\Mapper\Exception\InvalidArgumentException;
 use DCP\Mapper\Exception\OutOfBoundsException;
-use DCP\Mapper\TransformerCollection;
-use DCP\Mapper\TransformerInterface;
+use DCP\Mapper\RuleCollection;
+use DCP\Mapper\RuleInterface;
 
-class TransformerMap extends Map implements CollectionMapInterface
+class RuleMap extends Map implements CollectionMapInterface
 {
     /**
      * @param mixed $key
-     * @param TransformerCollection $value
+     * @param RuleCollection $value
      * @return $this
      * @throws InvalidArgumentException
      */
     public function set($key, $value)
     {
-        if (!($value instanceof TransformerCollection)) {
-            throw new InvalidArgumentException('$value must be an instance of TransformerCollection');
+        if (!($value instanceof RuleCollection)) {
+            throw new InvalidArgumentException('$value must be an instance of RuleCollection');
         }
 
         return parent::set($key, $value);
@@ -27,7 +27,7 @@ class TransformerMap extends Map implements CollectionMapInterface
     /**
      * @param mixed $key
      * @param bool $default
-     * @return TransformerCollection|TransformerInterface[]
+     * @return RuleCollection|RuleInterface[]
      */
     public function get($key, $default = true)
     {
@@ -37,7 +37,7 @@ class TransformerMap extends Map implements CollectionMapInterface
             $collection = parent::get($key);
         } catch (OutOfBoundsException $exception) {
             if ($default) {
-                $collection = new TransformerCollection();
+                $collection = new RuleCollection();
             }
         }
 
@@ -50,14 +50,14 @@ class TransformerMap extends Map implements CollectionMapInterface
      */
     public function add($key, $value)
     {
-        if (!($value instanceof TransformerInterface)) {
-            throw new InvalidArgumentException('$value must be an instance of TransformerInterface');
+        if (!($value instanceof RuleInterface)) {
+            throw new InvalidArgumentException('$value must be an instance of RuleInterface');
         }
 
         $collection = $this->get($key, false);
 
         if (!$collection) {
-            $collection = new TransformerCollection();
+            $collection = new RuleCollection();
             $this->set($key, $collection);
         }
 
