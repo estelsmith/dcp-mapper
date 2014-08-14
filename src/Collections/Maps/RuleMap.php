@@ -47,11 +47,7 @@ class RuleMap extends CollectionMap
      */
     public function add($key, $value)
     {
-        if (!($value instanceof RuleInterface)) {
-            throw new InvalidArgumentException('$value must be an instance of RuleInterface');
-        }
-
-        return parent::add($key, $value, function () {
+        return $this->addWithTypeCheck($key, $value, 'DCP\Mapper\RuleInterface', function () {
             return new RuleCollection();
         });
     }

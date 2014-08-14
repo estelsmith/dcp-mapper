@@ -3,6 +3,7 @@
 namespace DCP\Mapper\Collections\Maps;
 
 use DCP\Mapper\Collection;
+use DCP\Mapper\Exception\InvalidArgumentException;
 use DCP\Mapper\Exception\OutOfBoundsException;
 
 abstract class CollectionMap extends Map implements CollectionMapInterface
@@ -24,7 +25,7 @@ abstract class CollectionMap extends Map implements CollectionMapInterface
 
     public function add($key, $value, callable $defaultCollectionCallback = null)
     {
-        $collection = $this->get($key, null);
+        $collection = self::get($key);
 
         if (!$collection) {
             /** @var Collection $collection */
@@ -35,5 +36,14 @@ abstract class CollectionMap extends Map implements CollectionMapInterface
         $collection->add($value);
 
         return $this;
+    }
+
+    protected function addWithTypeCheck($key, $value, $type, callable $callback = null)
+    {
+        if (!(is_object($value) && is_subclass_of($value, $type))) {
+            throw new InvalidArgumentException(sprintf('$value must be an instance of %s', $type));
+        }
+
+        return self::add($key, $value, $callback);
     }
 }

@@ -73,7 +73,7 @@ class TransformerMapTest extends \PHPUnit_Framework_TestCase
 
     public function testCannotAddWhenValueIsNonTransformer()
     {
-        $expectedMessage = '$value must be an instance of TransformerInterface';
+        $expectedMessage = '$value must be an instance of DCP\Mapper\TransformerInterface';
         $actualMessage = '';
 
         $exceptionThrown = false;

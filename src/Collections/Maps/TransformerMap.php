@@ -48,11 +48,7 @@ class TransformerMap extends CollectionMap
      */
     public function add($key, $value)
     {
-        if (!($value instanceof TransformerInterface)) {
-            throw new InvalidArgumentException('$value must be an instance of TransformerInterface');
-        }
-
-        return parent::add($key, $value, function () {
+        return $this->addWithTypeCheck($key, $value, 'DCP\Mapper\TransformerInterface', function () {
             return new TransformerCollection();
         });
     }

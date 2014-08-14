@@ -73,7 +73,7 @@ class RuleMapTest extends \PHPUnit_Framework_TestCase
 
     public function testCannotAddWhenValueIsNonRule()
     {
-        $expectedMessage = '$value must be an instance of RuleInterface';
+        $expectedMessage = '$value must be an instance of DCP\Mapper\RuleInterface';
         $actualMessage = '';
 
         $exceptionThrown = false;
