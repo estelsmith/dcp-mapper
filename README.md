@@ -1,3 +1,5 @@
+# \*UNMAINTAINED!\*
+
 DCP-Mapper
 ==========
 A straightforward PHP AutoMapper
